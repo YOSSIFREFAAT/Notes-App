@@ -14,7 +14,11 @@ class CustomSearchIcon extends StatelessWidget {
         color: Colors.white.withOpacity(0.1),
       ),
       child: Center(
-        child: Icon(icon, size: 30),
+        child: IconButton(
+          splashRadius: 30,
+          icon: Icon(icon, size: 30),
+          onPressed: () {},
+        ),
       ),
     );
   }
