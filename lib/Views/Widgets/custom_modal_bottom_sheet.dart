@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/Views/Widgets/add_note_form.dart';
+import 'package:notes_app/views/widgets/add_note_form.dart';
 
 class CustomModalBottomSheet extends StatelessWidget {
   const CustomModalBottomSheet({super.key});
