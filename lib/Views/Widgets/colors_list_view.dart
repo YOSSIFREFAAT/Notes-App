@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 
 class ColorsListView extends StatefulWidget {
   const ColorsListView({super.key});
@@ -8,6 +10,13 @@ class ColorsListView extends StatefulWidget {
 }
 
 class _ColorsListViewState extends State<ColorsListView> {
+  List<Color> colors = const [
+    Color(0xffFFAF87),
+    Color(0xffFF8E72),
+    Color(0xffED6A5E),
+    Color(0xff4CE0B3),
+    Color(0xff377771),
+  ];
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -20,9 +29,11 @@ class _ColorsListViewState extends State<ColorsListView> {
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
             currentIndex = index;
+            BlocProvider.of<AddNoteCubit>(context).color = colors[currentIndex];
             setState(() {});
           },
           child: ColorItem(
+            color: colors[index],
             isActive: currentIndex == index,
           ),
         ),
@@ -33,26 +44,27 @@ class _ColorsListViewState extends State<ColorsListView> {
 
 class ColorItem extends StatelessWidget {
   final bool isActive;
-  const ColorItem({super.key, required this.isActive});
+  final Color color;
+  const ColorItem({super.key, required this.isActive, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return isActive
-        ? const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: CircleAvatar(
               backgroundColor: Colors.white,
               radius: 32,
               child: CircleAvatar(
-                backgroundColor: Colors.blue,
+                backgroundColor: color,
                 radius: 29,
               ),
             ),
           )
-        : const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: CircleAvatar(
-              backgroundColor: Colors.blue,
+              backgroundColor: color,
               radius: 32,
             ),
           );
